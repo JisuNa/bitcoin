@@ -1,10 +1,10 @@
 # Bitcoin (BTC)
 
-## Bitcoin Core란?
+### Bitcoin Core란?
 우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.
 오픈소스로 공개되어 있어 Github를 통해 누구나 이용할 수 있다.
 
-## Bitcoin Core Package 구성
+### Bitcoin Core Package 구성
 | 패키지 | 설명 |
 | ------ | ------ |
 | bitcoin-qt | 비트코인의 GUI클라이언트, 지갑(Wallet)에 해당한다.|
@@ -12,8 +12,8 @@
 | bitcoin-cli | Command Line Interface로 bitcoind를 동작시키기 위한 명령어를 입력한다. |
 
 
-## Bitcoin Core Install Guide
-### Install 사전준비
+### Bitcoin Core Install Guide
+#### Install 사전준비
 OS X command line tools : 
 ```sh
 $ xcode-select --install
@@ -27,12 +27,12 @@ make deploy를 사용해 디스크 이미지를 만드려면 RSVG가 필요하�
 $ brew install librsvg
 ```
 
-### Source Download
+#### Source Download
 원하는 위치로 이동하여 github에서 소스를 내려받는다.
 ```sh
 $ git clone https://github.com/bitcoin/bitcoin
 ```
-### Core Build
+#### Core Build
 아래와 같이 빌드한다.
 만약 GUI를 비활성화하여 빌드하고자 할 경우, configure에 --without-gui 옵션을 같이 명령한다.
 ```sh
@@ -41,14 +41,14 @@ $ ./configure
 $ make
 ```
 
-### Core Install
+#### Core Install
 ```sh
 $ sudo make install
 ```
 
 
 
-## Test net 기동
+### Test net 기동
 bitcoin-daemon(이하 bitcoind)를 이용하여 Bitcoin core를 실제 기동한다.
 ```sh
 $ bitcoind -regtest -daemon
