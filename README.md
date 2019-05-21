@@ -1,5 +1,5 @@
+![](https://steemitimages.com/300x200/https://en.bitcoin.it/w/images/en/c/cb/BC_Logotype.png)
 
-![Build Status](https://steemitimages.com/300x200/https://en.bitcoin.it/w/images/en/c/cb/BC_Logotype.png)
 # <center>Bitcoin</center>
 ### Bitcoin Core
 우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.
@@ -57,37 +57,78 @@ bitcoin-daemon(이하 bitcoind)를 이용하여 Bitcoin core를 실제 기동한
 $ bitcoind -testnet -daemon
 Bitcoin server starting
 ```
-> 테스트모드 종류
-> Testnet: 인터넷상에서 동작하는 테스트 네트워크. 테스트용 BTC를 사용하지만 처음 시작할 때 Testnet의 모든 블럭을 동기화해야 한다.
+> **테스트모드 종류**  
+> Testnet: 인터넷상에서 동작하는 테스트 네트워크. 테스트용 BTC를 사용하지만 처음 시작할 때 Testnet의 모든 블럭을 동기화해야 한다.  
 > Regtest: 로컬PC 내에서 동작하는 테스트 네트워크. 개인PC 내에서만 계정을 만들거나 채굴할 수 있고 블럭체인 초기화도 쉽게 때문에 테스트로 사용하기에 적합하다.
 
+
+## Wallet
 ### 지갑생성
-생성을 하지 않아도 "walletname" : "" 이라는 지갑이 있다.
-하지만 나중에 있을 혼란을 방지하기 위해 만드는 것을 추천한다.
+최초에 생성을 하지 않아도 "walletname" : "" 이라는 지갑이 있다.  
+이 문서에서는 "" 지갑을 기본지갑이라 말할 것이다.  
+전송테스트에 사용할 지갑을 하나 더 생성한다.
 ```sh
 $ bitcoin-cli -testnet createwallet bswallet
 ```
+> 지금 만든 지갑을 rpcwallet 이라고 한다. 
+
 
 ### 지갑주소 생성
-생성을 하면 지갑에 대한 지갑주소를 출력해준다.
+주소생성 명령을 하면 지갑에 대한 지갑주소를 출력해준다.
+지갑주소는 라벨별로 여러개 생성이 가능하다.
+
+**지갑구조**
+~~~
+Wallets [
+    "" : {  
+            "2MvBbkvMypRJGu7SRy7cSFvthPBaSWNRRuA": { "purpose": "receive" },
+            "2MzcLuKipadeojmpDFb2XV9qJdFdRe1Vpxh": { "purpose": "receive" },
+            "2N2GMmnAGLNgqmnM2bMGVgY7vNX1HRNFMHY": { "purpose": "receive" },
+            "2N6jvyzDSxFqbFtxhWt9XcrTxuDCAJ9UkaE": { "purpose": "receive" },
+            "2NG41izRBouYrydd8HznKmFbL1bXYaD9gj4": { "purpose": "receive" }
+    },
+    "bswallet" : {
+            "2N5iLkcBDWjihJXidjfFmrHD9VSoD9KdNw1" : { "purpose": "receive" },
+            "2NAyUMF41wW4bZWb8J2R4btvoXge8ZrfRrT" : { "purpose": "receive" }
+    }
+]
+~~~
+
 ```sh
-# Default에 주소생성
+# Default 라벨에 주소생성
 $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress
 2NA1pnKS6otinYbaHcgeaNoGgZ7as3psMKf
+
 # 특정 라벨에 주소생성
 $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress bswalletlabel
 2NFpYbjTLSZp7N2Y4mPP5TNXsPcBZcmSChX
 ```
 
+지갑 주소를 생성할 때 끝에 라벨명을 입력하지 않으면 ""(default) 라벨에 주소가 생성된다.
+
+### 지갑 활성화  
+bitcoin core 서비스를 재시작하면 기본지갑을 제외하고 모두 비활성화가 된다. (실 네트워크에서도 동일한지는 확인하지 않았다.)  
+```sh
+# 전체 rpc지갑 리스트 확인
+$ bitcoin-cli -testnet listwalletdir
+
+# 활성화된 rpc지갑 리스트 확인
+$ bitcoin-cli -testnet listwallets
+
+# rpc지갑 활성화
+$ bitcoin-cli -testnet loadwallet bswallet
+```
+
+
+## Transaction
 ### 테스트 비트코인받기 (채굴대신)
-아래 웹사이트로 접속하여 비트코인을 받을 수 있다. [비트코인받기] (https://bitcoinfaucet.uo1.net/send.php)
+[테스트 비트코인 받기](https://bitcoinfaucet.uo1.net/send.php) 웹사이트로 접속하여 비트코인을 받을 수 있다.  
 지갑에 들어오기까지 몇분정도 소요될 수 있다.
 
 ### 비트코인 송금
-형식은 다음과 같다.
--rpcwallet={지갑이름} sendtoaddress {지갑주소} {코인 개수}
+형식은 다음과 같다. -rpcwallet=지갑이름 sendtoaddress 지갑주소 코인개수
 ```sh
-$ bitcoin-cli -testnet -rpcwallet=testuser1 sendtoaddress 2NFpYbjTLSZp7N2Y4mPP5TNXsPcBZcmSChX 0.0001
+$ bitcoin-cli -testnet -rpcwallet=bswallet sendtoaddress 2NFpYbjTLSZp7N2Y4mPP5TNXsPcBZcmSChX 0.0001
 fe72391f75eceadd41df1ac80fb6ad7f19ec41533bcdad408060c896e2e244f4
 ```
 전송명령을 하면 txid를 출력해준다.
@@ -95,7 +136,7 @@ fe72391f75eceadd41df1ac80fb6ad7f19ec41533bcdad408060c896e2e244f4
 
 ### 지갑정보 확인
 ```sh
-$ bitcoin-cli -testnet -rpcwallet=testuser2 getwalletinfo
+$ bitcoin-cli -testnet -rpcwallet=bswallet getwalletinfo
 {
   "walletname": "napawallet",
   "walletversion": 169900,
@@ -112,18 +153,18 @@ $ bitcoin-cli -testnet -rpcwallet=testuser2 getwalletinfo
   "scanning": false
 }
 ```
-지갑정보를 출력하면 balance는 아직 0이지만, unconfirmed_balance는 0.00010000 인 것을 확인할 수 있다.
+지갑정보를 출력하면 balance는 아직 0이지만, unconfirmed_balance는 0.00010000 인 것을 확인할 수 있다.  
 전송완료까지 시간이 조금 소요된다.
 
 ### 그외의 명령어
 ```sh
-[확정된 트랜잭션 확인]
-$ bitcoin-cli -testnet -rpcwallet=testuser1  listunspent
+# 확정된 트랜잭션 확인
+$ bitcoin-cli -testnet -rpcwallet=bswallet  listunspent
 [
 ]
 
-[미확정 트랜잭션 확인]
-$ bitcoin-cli -testnet -rpcwallet=testuser1 listunspent 0
+# 미확정 트랜잭션 확인
+$ bitcoin-cli -testnet -rpcwallet=bswallet listunspent 0
 [
   {
     "txid": "fe72391f75eceadd41df1ac80fb6ad7f19ec41533bcdad408060c896e2e244f4",
@@ -140,6 +181,3 @@ $ bitcoin-cli -testnet -rpcwallet=testuser1 listunspent 0
   }
 ]
 ```
-
-
-
