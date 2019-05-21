@@ -74,7 +74,7 @@ $ bitcoin-cli -testnet createwallet bswallet
 
 
 ### 지갑주소 생성
-주소생성 명령을 하면 지갑에 대한 지갑주소를 출력해준다.
+주소생성 명령을 하면 지갑에 대한 지갑주소를 출력해준다.  
 지갑주소는 라벨별로 여러개 생성이 가능하다.
 
 **지갑구조**
@@ -107,7 +107,7 @@ $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress bswalletlabel
 지갑 주소를 생성할 때 끝에 라벨명을 입력하지 않으면 ""(default) 라벨에 주소가 생성된다.
 
 ### 지갑 활성화  
-bitcoin core 서비스를 재시작하면 기본지갑을 제외하고 모두 비활성화가 된다. (실 네트워크에서도 동일한지는 확인하지 않았다.)  
+bitcoin core 서비스를 재시작하면 기본지갑을 제외하고 모두 비활성화가 된다. (실 네트워크에서도 동일한지는 아직 확인되지 않았다.)  
 ```sh
 # 전체 rpc지갑 리스트 확인
 $ bitcoin-cli -testnet listwalletdir
