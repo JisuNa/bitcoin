@@ -1,8 +1,11 @@
+
+![Build Status](https://steemitimages.com/300x200/https://en.bitcoin.it/w/images/en/c/cb/BC_Logotype.png)
 # Bitcoin (BTC)
-![Build Status](https://en.bitcoin.it/w/images/en/c/cb/BC_Logotype.png)
+
 ### Bitcoin Core란?
 우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.
 오픈소스로 공개되어 있어 Github를 통해 누구나 이용할 수 있다.
+
 
 ### Bitcoin Core Package 구성
 | 패키지 | 설명 |
@@ -15,16 +18,16 @@
 ### Bitcoin Core Install Guide
 #### Install 사전준비
 ```sh
-[OS X command line tools]
+# OS X command line tools
 $ xcode-select --install
 ```
 ```sh
-[의존성 라이브러리 설치]
+# 의존성 라이브러리 설치
 $ brew install automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf python qt libevent
 ```
 
 ```sh
-[make deploy를 사용해 디스크 이미지를 만드려면 RSVG가 필요하므로 brew명령어로 라이브러리 설치]
+# make deploy를 사용해 디스크 이미지를 만드려면 RSVG가 필요하므로 brew명령어로 라이브러리 설치
 $ brew install librsvg
 ```
 
@@ -69,10 +72,10 @@ $ bitcoin-cli -testnet createwallet bswallet
 #### 지갑주소 생성
 생성을 하면 지갑에 대한 지갑주소를 출력해준다.
 ```sh
-[Default에 주소생성]
+# Default에 주소생성
 $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress
 2NA1pnKS6otinYbaHcgeaNoGgZ7as3psMKf
-[특정 라벨에 주소생성]
+# 특정 라벨에 주소생성
 $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress bswalletlabel
 2NFpYbjTLSZp7N2Y4mPP5TNXsPcBZcmSChX
 ```
