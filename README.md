@@ -2,7 +2,7 @@
 
 # <center>Bitcoin</center>
 ### Bitcoin Core
-우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.
+우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.  
 오픈소스로 공개되어 있어 Github를 통해 누구나 이용할 수 있다.
 
 
