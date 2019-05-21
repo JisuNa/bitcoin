@@ -1,6 +1,6 @@
 
 ![Build Status](https://steemitimages.com/300x200/https://en.bitcoin.it/w/images/en/c/cb/BC_Logotype.png)
-# Bitcoin
+# <center>Bitcoin</center>
 ### Bitcoin Core
 우리가 알고있는 비트코인은 Bitcoin core 클라이언트를 구동하는 블록체인을 지칭한다.
 오픈소스로 공개되어 있어 Github를 통해 누구나 이용할 수 있다.
@@ -83,7 +83,7 @@ $ bitcoin-cli -testnet -rpcwallet=bswallet getnewaddress bswalletlabel
 아래 웹사이트로 접속하여 비트코인을 받을 수 있다. [비트코인받기] (https://bitcoinfaucet.uo1.net/send.php)
 지갑에 들어오기까지 몇분정도 소요될 수 있다.
 
-#### 비트코인 송금
+### 비트코인 송금
 형식은 다음과 같다.
 -rpcwallet={지갑이름} sendtoaddress {지갑주소} {코인 개수}
 ```sh
